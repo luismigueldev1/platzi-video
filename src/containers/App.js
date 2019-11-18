@@ -10,52 +10,50 @@ import Footer from '../components/Footer'
 import '../assets/styles/App.scss'
 
 export default function App() {
-    const [videos, setVideos] = useState([])
-    
-    useEffect( () => {
+    const [videos, setVideos] = useState({ mylist: [], trends: [], originals: [] })
+    const [loading, setLoading] = useState(true)
 
-       async function fetchData(){
-        try {
-            const response = await fetch("http://localhost:4001/initialState")
-            const data = await response.json()
-            setVideos(data)
-        } catch (error) {
-            console.log(error.message);
-        }
-       }
-       fetchData()
+
+    useEffect(() => {
+        (async function fetchData() {
+            try {
+                const response = await fetch("http://localhost:4001/initialState")
+                const data = await response.json()
+                setVideos(data)
+                setLoading(false)
+            } catch (error) {
+                console.log(error.message)
+            }
+        })()
 
     }, [])
-    console.log(videos);
-    
+
     return (
         <>
             <Header />
             <Search />
-            <Categories title="Recomendados para ti">
-                <Carousel>
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
-                </Carousel>
-            </Categories>
+            {videos.mylist.length > 0 &&
+                <Categories title="Mi Lista">
+                    <Carousel>
+                        <CarouselItem />
+                    </Carousel>
+                </Categories>
+            }
 
-            <Categories title="Tus suscripciones">
+
+            <Categories title="Tendencias">
                 <Carousel>
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
+                    {videos.trends.map(item =>
+                        <CarouselItem key={item.id} {...item} />
+                    )}
                 </Carousel>
             </Categories>
 
             <Categories title="Originales de Platzi Video">
                 <Carousel>
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
+                    {videos.trends.map(item =>
+                        <CarouselItem key={item.id} {...item} />
+                    )}
                 </Carousel>
             </Categories>
             <Footer />
