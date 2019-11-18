@@ -9,7 +9,6 @@ export default function useInitialState(API){
                 const response = await fetch(API)
                 const data = await response.json()
                 setVideos(data)
-                setLoading(false)
             } catch (error) {
                 console.log(error.message)
             }
