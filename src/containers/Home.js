@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-import Header from '../components/Header'
+
 import Search from '../components/Search'
 import Categories from '../components/Categories'
 import Carousel from '../components/Carousel'
 import CarouselItem from '../components/CarouselItem'
-import Footer from '../components/Footer'
 import useInitialState from '../hooks/useInitialState'
 import '../assets/styles/App.scss'
 
@@ -16,7 +15,6 @@ export default function App() {
 
     return (
         <>
-            <Header />
             <Search />
             {initialState.mylist.length > 0 &&
                 <Categories title="Mi Lista">
@@ -42,7 +40,6 @@ export default function App() {
                     )}
                 </Carousel>
             </Categories>
-            <Footer />
         </>
     )
 }
