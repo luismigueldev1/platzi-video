@@ -13,7 +13,9 @@ function Home({ mylist, trends, originals }) {
             {mylist.length > 0 &&
                 <Categories title="Mi Lista">
                     <Carousel>
-                        <CarouselItem />
+                    {mylist.map(item =>
+                        <CarouselItem key={item.id} {...item} />
+                    )}
                     </Carousel>
                 </Categories>
             }
