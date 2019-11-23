@@ -9,18 +9,22 @@ import plusIcon from '../assets/static/plus-icon.png'
 
 
 function CarouselItem(props) {
-    const { id, cover, title, year, contentRating, duration, setFavorite } = props
+    const { id, cover, title, year, contentRating, duration, setFavorite, mylist } = props
     
     const handleSetFavorite = () =>{
-        console.log(props);
-        setFavorite({
-            id,
-            cover, 
-            title, 
-            year, 
-            contentRating, 
-            duration
-        })
+        const exist = mylist.find(item => item.id == id)
+        if(exist){
+            alert("Ya tienes agregado a favorito");  
+        }else{
+            setFavorite({
+                id,
+                cover, 
+                title, 
+                year, 
+                contentRating, 
+                duration
+            })
+        }
     }
     return (
         <div className="carousel-item">
@@ -56,5 +60,11 @@ const mapDispatchToProps = {
 
 }
 
+const mapStateToProps = (state) => {
+    return {
+        mylist : state.mylist
+    }
+}
 
-export default connect(null, mapDispatchToProps)(CarouselItem)
+
+export default connect(mapStateToProps, mapDispatchToProps)(CarouselItem)
