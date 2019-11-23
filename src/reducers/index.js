@@ -1,6 +1,6 @@
-import { SET_FAVORITE } from '../types'
+import { SET_FAVORITE, DELETE_FAVORITE } from '../types'
 
-export function reducer(state, action){
+export function reducer(state, action) {
 
     switch (action.type) {
 
@@ -12,9 +12,15 @@ export function reducer(state, action){
                     action.payload
                 ]
             }
+        case DELETE_FAVORITE:
+            return {
+                ...state,
+                mylist: state.mylist.filter(items => items.id != action.payload)
+            }
 
         default:
-           return state
+            return state
     }
 }
+
 

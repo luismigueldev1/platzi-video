@@ -1,21 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { setFavorite } from '../actions'
+import { setFavorite, deleteFavorite } from '../actions'
 import '../assets/styles/components/CarouselItem.scss'
 
 import playIcon from '../assets/static/play-icon.png'
 import plusIcon from '../assets/static/plus-icon.png'
+import removeIcon from '../assets/static/remove-icon.png'
 
 
 function CarouselItem(props) {
-    const { id, cover, title, year, contentRating, duration, setFavorite, mylist } = props
+    const {
+        id, 
+        cover, 
+        title, 
+        year, 
+        contentRating, 
+        duration, 
+        setFavorite, 
+        mylist, 
+        deleteFavorite 
+    } = props
     
     const handleSetFavorite = () =>{
         const exist = mylist.find(item => item.id == id)
         if(exist){
             alert("Ya tienes agregado a favorito");  
-        }else{
+        }else{ 
             setFavorite({
                 id,
                 cover, 
@@ -26,6 +37,11 @@ function CarouselItem(props) {
             })
         }
     }
+
+    const handleDeleteFavorite = (itemID) =>{
+        deleteFavorite(itemID)
+    }
+
     return (
         <div className="carousel-item">
             <img className="carousel-item__img" src={cover} alt=""/>
@@ -37,6 +53,12 @@ function CarouselItem(props) {
                         src={plusIcon} 
                         alt="Plus Icon"
                         onClick={handleSetFavorite}
+                    />
+                    <img 
+                        className="carousel-item__details--img" 
+                        src={removeIcon} 
+                        alt="Remove Icon"
+                        onClick={ () => handleDeleteFavorite(id) }
                     />
                 </div>
                 <p className="carousel-item__details--title">{title}</p>
@@ -57,6 +79,7 @@ CarouselItem.propTypes = {
 
 const mapDispatchToProps = {
     setFavorite,
+    deleteFavorite
 
 }
 
