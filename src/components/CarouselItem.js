@@ -11,62 +11,78 @@ import removeIcon from '../assets/static/remove-icon.png'
 
 function CarouselItem(props) {
     const {
-        id, 
-        cover, 
-        title, 
-        year, 
-        contentRating, 
-        duration, 
-        setFavorite, 
-        mylist, 
-        deleteFavorite 
+        id,
+        cover,
+        title,
+        year,
+        contentRating,
+        duration,
+        isList,
+        mylist,
+        setFavorite,
+        deleteFavorite
     } = props
-    
-    const handleSetFavorite = () =>{
-        const exist = mylist.find(item => item.id == id)
-        if(exist){
-            alert("Ya tienes agregado a favorito");  
-        }else{ 
+
+    const handleSetFavorite = () => {
+        /* const exist = mylist.find(item => item.id == id)
+        if (exist) {
+            alert("Ya tienes agregado a favorito");
+        } else {
             setFavorite({
                 id,
-                cover, 
-                title, 
-                year, 
-                contentRating, 
+                cover,
+                title,
+                year,
+                contentRating,
                 duration
             })
-        }
+        } */
+
+        setFavorite({
+            id,
+            cover,
+            title,
+            year,
+            contentRating,
+            duration
+        })
+
     }
 
-    const handleDeleteFavorite = (itemID) =>{
+    const handleDeleteFavorite = (itemID) => {
         deleteFavorite(itemID)
     }
 
     return (
         <div className="carousel-item">
-            <img className="carousel-item__img" src={cover} alt=""/>
+            <img className="carousel-item__img" src={cover} alt="" />
             <div className="carousel-item__details">
                 <div>
-                    <img className="carousel-item__details--img" src={playIcon} alt="Play Icon"/>
-                    <img 
-                        className="carousel-item__details--img" 
-                        src={plusIcon} 
-                        alt="Plus Icon"
-                        onClick={handleSetFavorite}
-                    />
-                    <img 
-                        className="carousel-item__details--img" 
-                        src={removeIcon} 
-                        alt="Remove Icon"
-                        onClick={ () => handleDeleteFavorite(id) }
-                    />
+                    <img className="carousel-item__details--img" src={playIcon} alt="Play Icon" />
+                    {isList ?
+                        <img
+                            className="carousel-item__details--img"
+                            src={removeIcon}
+                            alt="Remove Icon"
+                            onClick={() => handleDeleteFavorite(id)}
+                        />
+                    :
+                        <img
+                            className="carousel-item__details--img"
+                            src={plusIcon}
+                            alt="Plus Icon"
+                            onClick={handleSetFavorite}
+                        />
+                    }
+
+
                 </div>
                 <p className="carousel-item__details--title">{title}</p>
                 <p className="carousel-item__details--subtitle">
                     {` ${year} ${contentRating} ${duration}min`}</p>
             </div>
         </div>
-    ) 
+    )
 }
 
 CarouselItem.propTypes = {
@@ -85,7 +101,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
     return {
-        mylist : state.mylist
+        mylist: state.mylist
     }
 }
 
