@@ -1,4 +1,4 @@
-import { SET_FAVORITE, DELETE_FAVORITE, LOGIN_REQUEST } from '../types'
+import { SET_FAVORITE, DELETE_FAVORITE, LOGIN_REQUEST, LOGOUT_REQUEST } from '../types'
 
 export function setFavorite(payload){
     return{
@@ -17,6 +17,13 @@ export function deleteFavorite(payload){
 export function loginRequest(payload){
     return{
         type: LOGIN_REQUEST,
+        payload
+    }
+}
+
+export function logoutRequest(payload){
+    return{
+        type: LOGOUT_REQUEST,
         payload
     }
 }

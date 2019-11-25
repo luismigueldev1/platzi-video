@@ -25,9 +25,8 @@ function Login(props) {
         event.preventDefault()
         loginRequest(form)
         history.push("/")
-        
-
     }
+    
     return (
         <section className="login">
             <section className="login__container">
