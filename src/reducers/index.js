@@ -1,4 +1,9 @@
-import { SET_FAVORITE, DELETE_FAVORITE, LOGIN_REQUEST, LOGOUT_REQUEST } from '../types'
+import { SET_FAVORITE, 
+    DELETE_FAVORITE, 
+    LOGIN_REQUEST, 
+    LOGOUT_REQUEST, 
+    REGISTER_REQUEST 
+} from '../types'
 
 export function reducer(state, action) {
 
@@ -32,6 +37,12 @@ export function reducer(state, action) {
             }
 
         case LOGOUT_REQUEST:
+            return {
+                ...state,
+                user: action.payload
+            }
+
+        case REGISTER_REQUEST:
             return {
                 ...state,
                 user: action.payload
