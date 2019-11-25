@@ -1,8 +1,10 @@
-import { SET_FAVORITE, 
-    DELETE_FAVORITE, 
-    LOGIN_REQUEST, 
-    LOGOUT_REQUEST, 
-    REGISTER_REQUEST 
+import {
+    SET_FAVORITE,
+    DELETE_FAVORITE,
+    LOGIN_REQUEST,
+    LOGOUT_REQUEST,
+    REGISTER_REQUEST,
+    GET_VIDEO_SOURCE
 } from '../types'
 
 export function reducer(state, action) {
@@ -47,10 +49,16 @@ export function reducer(state, action) {
                 ...state,
                 user: action.payload
             }
+        case GET_VIDEO_SOURCE:
+            return {
+                ...state,
+                playing:
+                    state.trends.concat(state.originals)
+                        .find(item => item.id === Number(action.payload))
+                    || []
+            }
 
         default:
             return state
     }
 }
-
-
