@@ -1,4 +1,4 @@
-import { SET_FAVORITE, DELETE_FAVORITE } from '../types'
+import { SET_FAVORITE, DELETE_FAVORITE, LOGIN_REQUEST } from '../types'
 
 export function reducer(state, action) {
 
@@ -6,12 +6,11 @@ export function reducer(state, action) {
 
         case SET_FAVORITE:
             const exist = state.mylist.find(item => item.id === action.payload.id)
-            if(exist){
-                return{
+            if (exist) {
+                return {
                     ...state
                 }
-
-            } 
+            }
             return {
                 ...state,
                 mylist: [
@@ -19,12 +18,19 @@ export function reducer(state, action) {
                     action.payload
                 ]
             }
+
         case DELETE_FAVORITE:
             return {
                 ...state,
                 mylist: state.mylist.filter(items => items.id != action.payload)
             }
 
+        case LOGIN_REQUEST:
+            return {
+                ...state,
+                user: action.payload
+            }
+            
         default:
             return state
     }
