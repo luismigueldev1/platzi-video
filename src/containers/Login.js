@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import '../assets/styles/components/Login.scss'
@@ -6,13 +6,46 @@ import googleIcon from '../assets/static/google-icon.png'
 import twitterIcon from '../assets/static/twitter-icon.png'
 
 export default function Login() {
+    const [form, setForm] = useState({
+        email: '',
+        password: ''
+    })
+
+    const handleInput = event =>{
+        setForm({
+            ...form,
+            [event.target.name] : event.target.value
+        })
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        console.log(form);
+        
+
+    }
     return (
         <section className="login">
             <section className="login__container">
                 <h2>Inicia sesión</h2>
-                <form className="login__container--form">
-                    <input className="login__input" type="text" placeholder="Correo" />
-                    <input className="login__input" type="password" placeholder="Contraseña" />
+                <form 
+                    className="login__container--form"
+                    onSubmit={handleSubmit}
+                >
+                    <input 
+                        className="login__input" 
+                        type="email" 
+                        name="email"
+                        placeholder="Correo" 
+                        onChange={handleInput}
+                    />
+                    <input 
+                        className="login__input"
+                        type="password"
+                        name="password"
+                        placeholder="Contraseña"
+                        onChange={handleInput}
+                    />
                     <button className="login__button">Iniciar sesión</button>
                     <div className="login__container--remember-me">
                         <label>
