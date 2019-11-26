@@ -4,7 +4,8 @@ import {
     LOGIN_REQUEST, 
     LOGOUT_REQUEST, 
     REGISTER_REQUEST,
-    GET_VIDEO_SOURCE
+    GET_VIDEO_SOURCE,
+    SEARCH_VIDEO
 } from '../types'
 
 export function setFavorite(payload){
@@ -45,6 +46,13 @@ export function registerRequest(payload){
 export function getVideoSource(payload){
     return{
         type: GET_VIDEO_SOURCE,
+        payload
+    }
+}
+
+export function searchVideo(payload){
+    return{
+        type: SEARCH_VIDEO,
         payload
     }
 }

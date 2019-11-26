@@ -4,7 +4,8 @@ import {
     LOGIN_REQUEST,
     LOGOUT_REQUEST,
     REGISTER_REQUEST,
-    GET_VIDEO_SOURCE
+    GET_VIDEO_SOURCE,
+    SEARCH_VIDEO
 } from '../types'
 
 export function reducer(state, action) {
@@ -56,6 +57,21 @@ export function reducer(state, action) {
                     state.trends.concat(state.originals)
                         .find(item => item.id === Number(action.payload))
                     || []
+            }
+        case SEARCH_VIDEO:
+            if(action.payload == "") return {...state, results:[]}
+            let results = []
+            const search = action.payload.toLowerCase()
+            const allVideos = state.trends.concat(state.originals)
+
+            results = allVideos.filter(item => 
+                item.title.toLowerCase()
+                    .includes(search)
+                
+            )
+            return {
+                ...state,
+                results : results 
             }
 
         default:

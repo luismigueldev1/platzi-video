@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getVideoSource } from '../actions'
 import '../assets/styles/components/Player.scss'
@@ -10,11 +10,15 @@ function Player(props) {
         getVideoSource
     } = props
 
+    
+
     const { id } = props.match.params
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         getVideoSource(id)
-
+        return () => {
+            getVideoSource(null)
+        }
     }, [])
     
     const hasPlaying = Object.keys(props.playing).length > 0

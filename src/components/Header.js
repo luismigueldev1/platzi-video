@@ -17,7 +17,7 @@ function Header(props) {
     }
 
     return (
-        <header className={pathname === '/' ? 'header' : 'header header-green' }>
+        <header className={pathname === '/login' | '/register' ? 'header header-green' : 'header' }>
             <Link to="/">
                 <img className="header__img" src={logoPlatziVideo} alt="Platzi Video" />
             </Link>
