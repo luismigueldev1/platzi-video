@@ -1,13 +1,15 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 
-export default function Layout({ children }) {
+function Layout({ children, location }) {
     return (
         <div className="App">
-            <Header/>
+            <Header pathname={location.pathname}/>
                 {children}
             <Footer/>
         </div>
     )
 }
+export default withRouter(Layout)

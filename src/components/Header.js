@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logoutRequest } from '../actions'
@@ -9,15 +9,15 @@ import logoPlatziVideo from '../assets/static/logo-platzi-video-BW2.png'
 import userIcon from '../assets/static/user-icon.png'
 
 function Header(props) {
-    const { user, logoutRequest } = props
+    const { user, logoutRequest, pathname } = props
     const hasUser = Object.keys(user).length > 0
 
     const handleLogout = () => {
         logoutRequest({})
     }
-    
+
     return (
-        <header className="header">
+        <header className={pathname === '/' ? 'header' : 'header header-green' }>
             <Link to="/">
                 <img className="header__img" src={logoPlatziVideo} alt="Platzi Video" />
             </Link>
@@ -38,7 +38,7 @@ function Header(props) {
                                 {user.email}
                             </Link>
                         </li>
-                    :
+                        :
                         null
                     }
 
@@ -48,7 +48,7 @@ function Header(props) {
                                 Cerrar Sesión
                             </a>
                         </li>
-                    :
+                        :
                         <li>
                             <Link to="/login">
                                 Iniciar sesión
